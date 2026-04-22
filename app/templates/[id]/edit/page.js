@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
 
 export default function EditPage({ params: paramsPromise }) {
+  const [orderId, setOrderId] = useState(null)
   const params = React.use(paramsPromise)
   const [form, setForm] = useState({
     customer_name: '',
@@ -22,50 +23,60 @@ export default function EditPage({ params: paramsPromise }) {
   }
 
   async function handleSubmit() {
+
     setLoading(true)
 
-    const { error } = await supabase
-      .from('orders')
-      .insert({
-        customer_name: form.customer_name,
-        customer_phone: form.customer_phone,
-        template_id: params.id,
-        custom_data: {
-          guest_name: form.guest_name,
-          event_date: form.event_date,
-          event_time: form.event_time,
-          venue: form.venue,
-        },
-        status: 'pending'
-      })
+    const { data, error } = await supabase
+  .from('orders')
+  .insert({
+    customer_name: form.customer_name,
+    customer_phone: form.customer_phone,
+    template_id: params.id,
+    custom_data: {
+      guest_name: form.guest_name,
+      event_date: form.event_date,
+      event_time: form.event_time,
+      venue: form.venue,
+    },
+    status: 'pending'
+  })
+  .select()
+  .single()
 
     setLoading(false)
 
     if (!error) {
+      setOrderId(data.id)
       setDone(true)
     } else {
-      alert('Ошибка, попробуй снова: ' + error.message)
+      alert('Ошибка: ' + error.message)
     }
   }
 
-  if (done) {
+  if (done && orderId) {
     return (
       <main className="min-h-screen p-8 bg-gray-50 flex items-center justify-center">
-        <div className="bg-white rounded-lg shadow p-8 max-w-md w-full text-center">
+        <div className="bg-white rounded-2xl shadow p-8 max-w-md w-full text-center">
           <div className="text-5xl mb-4">✅</div>
           <h2 className="text-2xl font-bold mb-2">Заказ принят!</h2>
           <p className="text-gray-600 mb-6">
             Переведи оплату на Kaspi и отправь скриншот в WhatsApp
           </p>
-          <div className="bg-gray-50 rounded-lg p-4 mb-6 text-left">
+          <div className="bg-gray-50 rounded-xl p-4 mb-6 text-left">
             <p className="font-semibold">Номер Kaspi:</p>
             <p className="text-2xl font-bold text-blue-600">+7 777 123 45 67</p>
             <p className="font-semibold mt-3">Сумма:</p>
             <p className="text-2xl font-bold text-green-600">1 990 тг</p>
           </div>
           <a
-            href="https://wa.me/77771234567"
-            className="block w-full text-center bg-green-500 text-white py-3 rounded-lg font-semibold"
+            href={`/templates/${params.id}/preview?order=${orderId}`}
+            className="block w-full text-center bg-purple-600 text-white py-3 rounded-xl font-semibold mb-3 hover:bg-purple-700"
+          >
+            Посмотреть приглашение →
+          </a>
+          <a
+            href="https://wa.me/77056388858"
+            className="block w-full text-center bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600"
           >
             Написать в WhatsApp
           </a>
