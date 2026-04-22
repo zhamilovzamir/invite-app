@@ -40,7 +40,8 @@ export default async function Home() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {templates?.map((template) => (
-            <div key={template.id} className="bg-white rounded-lg shadow p-6">
+            <a key={template.id} href={`/templates/${template.id}`} className="bg-white rounded-lg shadow p-6 block hover:shadow-lg transition-shadow">
+
               <h2 className="text-xl font-semibold mb-2">{template.name}</h2>
               <p className="text-gray-600 mb-4">{template.description}</p>
               <div className="flex justify-between items-center">
@@ -53,7 +54,7 @@ export default async function Home() {
                   </span>
                 )}
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
