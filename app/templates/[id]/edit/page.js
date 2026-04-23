@@ -80,36 +80,51 @@ export default function EditPage({ params: paramsPromise }) {
 }
 
   if (done && orderId) {
-    return (
-      <main className="min-h-screen p-8 bg-gray-50 flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow p-8 max-w-md w-full text-center">
-          <div className="text-5xl mb-4">✅</div>
-          <h2 className="text-2xl font-bold mb-2">Заказ принят!</h2>
-          <p className="text-gray-600 mb-6">
-            Переведи оплату на Kaspi и отправь скриншот в WhatsApp
-          </p>
-          <div className="bg-gray-50 rounded-xl p-4 mb-6 text-left">
-            <p className="font-semibold">Номер Kaspi:</p>
-            <p className="text-2xl font-bold text-blue-600">+7 777 123 45 67</p>
-            <p className="font-semibold mt-3">Сумма:</p>
-            <p className="text-2xl font-bold text-green-600">1 990 тг</p>
-          </div>
-          <a
-            href={`/templates/${params.id}/preview?order=${orderId}`}
-            className="block w-full text-center bg-purple-600 text-white py-3 rounded-xl font-semibold mb-3 hover:bg-purple-700"
-          >
-            Посмотреть приглашение →
-          </a>
-          <a
-            href="https://wa.me/77056388858"
-            className="block w-full text-center bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600"
-          >
-            Написать в WhatsApp
-          </a>
+  const inviteUrl = `${window.location.origin}/invite/${orderId}`
+  return (
+    <main className="min-h-screen p-8 bg-gray-50 flex items-center justify-center">
+      <div className="bg-white rounded-2xl shadow p-8 max-w-md w-full text-center">
+        <div className="text-5xl mb-4">✅</div>
+        <h2 className="text-2xl font-bold mb-2">Заказ принят!</h2>
+        <p className="text-gray-600 mb-6">
+          Переведи оплату на Kaspi и отправь скриншот в WhatsApp
+        </p>
+        <div className="bg-gray-50 rounded-xl p-4 mb-6 text-left">
+          <p className="font-semibold">Номер Kaspi:</p>
+          <p className="text-2xl font-bold text-blue-600">+7 777 123 45 67</p>
+          <p className="font-semibold mt-3">Сумма:</p>
+          <p className="text-2xl font-bold text-green-600">1 990 тг</p>
         </div>
-      </main>
-    )
-  }
+
+        <div className="bg-purple-50 rounded-xl p-4 mb-6 text-left">
+          <p className="font-semibold text-purple-800 mb-2">Ссылка на приглашение:</p>
+          <p className="text-sm text-purple-600 break-all">
+            {window.location.origin}/invite/{orderId}
+          </p>
+          <button
+            onClick={() => navigator.clipboard.writeText(`${window.location.origin}/invite/${orderId}`)}
+            className="mt-2 text-xs bg-purple-600 text-white px-3 py-1 rounded-lg hover:bg-purple-700"
+          >
+            Скопировать ссылку
+          </button>
+        </div>
+
+        <a
+          href={`/invite/${orderId}`}
+          className="block w-full text-center bg-purple-600 text-white py-3 rounded-xl font-semibold mb-3 hover:bg-purple-700"
+        >
+          Посмотреть приглашение →
+        </a>
+        <a
+          href="https://wa.me/77771234567"
+          className="block w-full text-center bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600"
+        >
+          Написать в WhatsApp
+        </a>
+      </div>
+    </main>
+  )
+}
 
   return (
     <main className="min-h-screen p-8 bg-gray-50">
