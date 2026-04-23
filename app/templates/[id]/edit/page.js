@@ -49,36 +49,35 @@ export default function EditPage({ params: paramsPromise }) {
 }
 
   async function handleSubmit() {
+  setLoading(true)
 
-    setLoading(true)
-
-    const { data, error } = await supabase
-  .from('orders')
-  .insert({
-    customer_name: form.customer_name,
-    customer_phone: form.customer_phone,
-    template_id: params.id,
-    custom_data: {
-      guest_name: form.guest_name,
-      event_date: form.event_date,
-      event_time: form.event_time,
-      venue: form.venue,
-      photo_url: photoUrl,
-    },
-    status: 'pending'
+  const res = await fetch('/api/orders', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      customer_name: form.customer_name,
+      customer_phone: form.customer_phone,
+      template_id: params.id,
+      custom_data: {
+        guest_name: form.guest_name,
+        event_date: form.event_date,
+        event_time: form.event_time,
+        venue: form.venue,
+        photo_url: photoUrl,
+      },
+    }),
   })
-  .select()
-  .single()
 
-    setLoading(false)
+  const result = await res.json()
+  setLoading(false)
 
-    if (!error) {
-      setOrderId(data.id)
-      setDone(true)
-    } else {
-      alert('Ошибка: ' + error.message)
-    }
+  if (result.data) {
+    setOrderId(result.data.id)
+    setDone(true)
+  } else {
+    alert('Ошибка: ' + result.error)
   }
+}
 
   if (done && orderId) {
     return (
