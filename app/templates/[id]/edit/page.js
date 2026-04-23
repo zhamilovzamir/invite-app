@@ -16,11 +16,37 @@ export default function EditPage({ params: paramsPromise }) {
     venue: '',
   })
   const [loading, setLoading] = useState(false)
+  const [photo, setPhoto] = useState(null)
+  const [photoUrl, setPhotoUrl] = useState(null)
+  const [uploading, setUploading] = useState(false)
   const [done, setDone] = useState(false)
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
+  
+  async function handlePhoto(e) {
+  const file = e.target.files[0]
+  if (!file) return
+
+  setUploading(true)
+
+  const fileName = `${Date.now()}-${file.name}`
+  const { data, error } = await supabase.storage
+    .from('photos')
+    .upload(fileName, file)
+
+  if (!error) {
+    const { data: urlData } = supabase.storage
+      .from('photos')
+      .getPublicUrl(fileName)
+    setPhotoUrl(urlData.publicUrl)
+  } else {
+    alert('Ошибка загрузки фото: ' + error.message)
+  }
+
+  setUploading(false)
+}
 
   async function handleSubmit() {
 
@@ -37,6 +63,7 @@ export default function EditPage({ params: paramsPromise }) {
       event_date: form.event_date,
       event_time: form.event_time,
       venue: form.venue,
+      photo_url: photoUrl,
     },
     status: 'pending'
   })
@@ -163,6 +190,27 @@ export default function EditPage({ params: paramsPromise }) {
                 placeholder="Ресторан Астана"
               />
             </div>
+            <div>
+  <label className="block text-sm font-medium mb-1">
+    Фото (необязательно)
+  </label>
+  <input
+    type="file"
+    accept="image/*"
+    onChange={handlePhoto}
+    className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+  />
+  {uploading && (
+    <p className="text-sm text-gray-500 mt-1">Загружаем фото...</p>
+  )}
+  {photoUrl && (
+    <img
+      src={photoUrl}
+      alt="Превью"
+      className="mt-3 w-full h-40 object-cover rounded-lg"
+    />
+  )}
+</div>
           </div>
 
           <button
