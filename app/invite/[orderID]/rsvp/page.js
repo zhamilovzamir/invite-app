@@ -12,17 +12,16 @@ export default async function RsvpPage({ params, searchParams }) {
     .single()
 
   if (order) {
-    const guestName = order.custom_data?.guest_name || 'Гость'
+    const guestName = order.custom_data?.guest_name || 'Қонақ'
     const emoji = answer === 'yes' ? '✅' : '❌'
-    const text = answer === 'yes' ? 'придёт' : 'не сможет прийти'
+    const text = answer === 'yes' ? 'Келемін' : 'Келе алмаймын'
 
     await sendTelegramMessage(`
-${emoji} <b>RSVP ответ!</b>
+${emoji} <b>RSVP жауабы!</b>
 
-🎉 Событие: ${guestName}
-👤 Организатор: ${order.customer_name}
-📞 Телефон: ${order.customer_phone}
-💬 Гость ${text}
+🎉 Той: ${guestName}
+👤 Той иесі: ${order.customer_name}
+💬 Жауап: ${text}
     `)
   }
 
@@ -33,12 +32,12 @@ ${emoji} <b>RSVP ответ!</b>
           {answer === 'yes' ? '🎉' : '😢'}
         </div>
         <h1 className="text-2xl font-bold mb-2">
-          {answer === 'yes' ? 'Отлично!' : 'Жаль!'}
+          {answer === 'yes' ? 'Рахмет!' : 'Жарайды!'}
         </h1>
         <p className="text-gray-500">
           {answer === 'yes'
-            ? 'Ваш ответ принят. Ждём вас на празднике!'
-            : 'Ваш ответ принят. Будем скучать!'}
+            ? 'Жауабыңыз қабылданды. Сізді күтеміз!'
+            : 'Жауабыңыз қабылданды.'}
         </p>
       </div>
     </main>

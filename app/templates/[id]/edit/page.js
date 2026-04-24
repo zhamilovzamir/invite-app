@@ -8,13 +8,16 @@ export default function EditPage({ params: paramsPromise }) {
   const [orderId, setOrderId] = useState(null)
   const params = React.use(paramsPromise)
   const [form, setForm] = useState({
-    customer_name: '',
-    customer_phone: '',
-    guest_name: '',
-    event_date: '',
-    event_time: '',
-    venue: '',
-  })
+  customer_name: '',
+  customer_phone: '',
+  guest_name: '',
+  event_date: '',
+  event_time: '',
+  venue: '',
+  map_url: '',
+  telegram_channel: '',
+  hosts: '',
+})
   const [loading, setLoading] = useState(false)
   const [photo, setPhoto] = useState(null)
   const [photoUrl, setPhotoUrl] = useState(null)
@@ -59,12 +62,15 @@ export default function EditPage({ params: paramsPromise }) {
       customer_phone: form.customer_phone,
       template_id: params.id,
       custom_data: {
-        guest_name: form.guest_name,
-        event_date: form.event_date,
-        event_time: form.event_time,
-        venue: form.venue,
-        photo_url: photoUrl,
-      },
+  guest_name: form.guest_name,
+  event_date: form.event_date,
+  event_time: form.event_time,
+  venue: form.venue,
+  hosts: form.hosts,
+  map_url: form.map_url,
+  telegram_channel: form.telegram_channel,
+  photo_url: photoUrl,
+},
     }),
   })
 
@@ -204,6 +210,39 @@ export default function EditPage({ params: paramsPromise }) {
                 placeholder="Ресторан Астана"
               />
             </div>
+            <div>
+  <label className="block text-sm font-medium mb-1">Той иелері (имена)</label>
+  <input
+    name="hosts"
+    value={form.hosts}
+    onChange={handleChange}
+    className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    placeholder="Асем мен Берік"
+  />
+</div>
+
+<div>
+  <label className="block text-sm font-medium mb-1">Ссылка на карту (Google Maps)</label>
+  <input
+    name="map_url"
+    value={form.map_url}
+    onChange={handleChange}
+    className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    placeholder="https://maps.google.com/..."
+  />
+  <p className="text-xs text-gray-400 mt-1">Открой Google Maps → найди ресторан → нажми Поделиться → скопируй ссылку</p>
+</div>
+
+<div>
+  <label className="block text-sm font-medium mb-1">Telegram канал (необязательно)</label>
+  <input
+    name="telegram_channel"
+    value={form.telegram_channel}
+    onChange={handleChange}
+    className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    placeholder="https://t.me/your_channel"
+  />
+</div>
             <div>
   <label className="block text-sm font-medium mb-1">
     Фото (необязательно)
