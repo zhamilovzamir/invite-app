@@ -47,7 +47,8 @@ export default async function AdminPage() {
                         : order.status === 'done' ? 'Готово'
                         : 'Ожидает'}
                     </span>
-                    <StatusButton orderId={order.id} status={order.status} />
+                    <StatusButton orderId={order.id} status={order.status} isPaid={order.is_paid}
+  customerPhone={order.customer_phone} />
                   </td>
                   <td className="p-4 text-sm text-gray-500">
                     {new Date(order.created_at).toLocaleDateString('ru-RU')}

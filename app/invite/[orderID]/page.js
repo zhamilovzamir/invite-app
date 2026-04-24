@@ -37,7 +37,43 @@ export default async function InvitePage({ params }) {
   const templateData = {
     ...order.custom_data,
     orderId: order.id,
+    isPaid: order.is_paid,
   }
 
-  return <TemplateComponent data={templateData} />
+  return (
+    <div className="relative">
+      <TemplateComponent data={templateData} />
+
+      {/* Watermark если не оплачено */}
+      {!order.is_paid && (
+        <div className="fixed inset-0 pointer-events-none z-50">
+          {/* Верхний баннер */}
+          <div className="pointer-events-auto fixed top-0 left-0 right-0 bg-yellow-400 text-yellow-900 text-center py-3 px-4 font-semibold text-sm z-50">
+            ⚠️ Демо версия — оплатите для активации •{' '}
+            <a
+              href={`/pay/${order.id}`}
+              className="underline font-bold hover:text-yellow-700"
+            >
+              Оплатить сейчас
+            </a>
+          </div>
+
+          {/* Водяной знак по центру */}
+          <div className="fixed inset-0 flex items-center justify-center">
+            <div
+              className="text-gray-300 text-6xl font-bold uppercase select-none"
+              style={{
+                transform: 'rotate(-45deg)',
+                opacity: 0.15,
+                fontSize: '80px',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              DEMO
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
 }
