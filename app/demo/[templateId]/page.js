@@ -1,12 +1,13 @@
 import { supabase } from '@/lib/supabase'
 import WeddingClassic from '@/components/templates/wedding/classic'
+import WeddingRed from '@/components/templates/wedding/red'
 import KyzUzatuClassic from '@/components/templates/kyz-uzatu/classic'
 import KyzUzatuModern from '@/components/templates/kyz-uzatu/modern'
 import TusauKeserClassic from '@/components/templates/tusau-keser/classic'
 
 const templateMap = {
   'uilenu-toi-classic': WeddingClassic,
-  'uilenu-toi-modern': WeddingClassic,
+  'uilenu-toi-red': WeddingRed,
   'uzatu-toi-classic': KyzUzatuClassic,
   'uzatu-toi-modern': KyzUzatuModern,
   'sauilik-toi-classic': TusauKeserClassic,
