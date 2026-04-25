@@ -97,7 +97,7 @@ export default function EditPage({ params: paramsPromise }) {
         </p>
         <div className="bg-gray-50 rounded-xl p-4 mb-6 text-left">
           <p className="font-semibold">Номер Kaspi:</p>
-          <p className="text-2xl font-bold text-blue-600">+7 777 123 45 67</p>
+          <p className="text-2xl font-bold text-blue-600">4400 4301 5838 7080</p>
           <p className="font-semibold mt-3">Сумма:</p>
           <p className="text-2xl font-bold text-green-600">1 990 тг</p>
         </div>
@@ -122,12 +122,23 @@ export default function EditPage({ params: paramsPromise }) {
           Посмотреть приглашение →
         </a>
         <a
-          href="https://wa.me/77771234567"
+          href="https://wa.me/77066355150"
           className="block w-full text-center bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600"
         >
           Написать в WhatsApp
         </a>
       </div>
+      {/* Ссылка на dashboard */}
+<div className="bg-blue-50 rounded-xl p-4 mb-4 text-left">
+  <p className="font-semibold text-blue-800 mb-2">Ваша страница организатора:</p>
+  <p className="text-sm text-blue-600 break-all">/dashboard/{orderId}</p>
+  <button
+    onClick={() => navigator.clipboard.writeText(`${window.location.origin}/dashboard/${orderId}`)}
+    className="mt-2 text-xs bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700"
+  >
+    Скопировать ссылку
+  </button>
+</div>
     </main>
   )
 }

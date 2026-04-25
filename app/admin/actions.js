@@ -22,7 +22,8 @@ export async function activateOrder(orderId, customerPhone) {
   await sendTelegramMessage(`
 ✅ <b>Заказ активирован!</b>
 📞 Телефон: ${customerPhone}
-🔗 Ссылка: /invite/${orderId}
+🔗 Приглашение: /invite/${orderId}
+👤 Дашборд: /dashboard/${orderId}
   `)
 
   revalidatePath('/admin')

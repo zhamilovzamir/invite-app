@@ -5,10 +5,14 @@ import KyzUzatuModern from '@/components/templates/kyz-uzatu/modern'
 import TusauKeserClassic from '@/components/templates/tusau-keser/classic'
 
 const templateMap = {
-  'wedding-classic': WeddingClassic,
-  'kyz-uzatu-classic': KyzUzatuClassic,
-  'kyz-uzatu-modern': KyzUzatuModern,
-  'tusau-keser-classic': TusauKeserClassic,
+  'uilenu-toi-classic': WeddingClassic,
+  'uilenu-toi-modern': WeddingClassic,
+  'uzatu-toi-classic': KyzUzatuClassic,
+  'uzatu-toi-modern': KyzUzatuModern,
+  'sauilik-toi-classic': TusauKeserClassic,
+  'sauilik-toi-colorful': TusauKeserClassic,
+  'tugan-kun-classic': TusauKeserClassic,
+  'tugan-kun-minimal': TusauKeserClassic,
 }
 
 export default async function InvitePage({ params }) {
