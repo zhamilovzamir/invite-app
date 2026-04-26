@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-export default function KyzUzatuClassic({ data }) {
+export default function UzatuClassic({ data }) {
   const [comment, setComment] = useState('')
   const [guestName, setGuestName] = useState('')
   const [submitted, setSubmitted] = useState(false)

@@ -1,19 +1,26 @@
 import { supabase } from '@/lib/supabase'
 import WeddingClassic from '@/components/templates/wedding/classic'
 import WeddingRed from '@/components/templates/wedding/red'
-import KyzUzatuClassic from '@/components/templates/kyz-uzatu/classic'
-import KyzUzatuModern from '@/components/templates/kyz-uzatu/modern'
-import TusauKeserClassic from '@/components/templates/tusau-keser/classic'
+import UzatuClassic from '@/components/templates/uzatu/classic'
+import UzatuModern from '@/components/templates/uzatu/modern'
+import SauilikClassic from '@/components/templates/sauilik/classic'
+import SauilikColorful from '@/components/templates/sauilik/colorful'
+import TuganKunClassic from '@/components/templates/tugan-kun/classic'
+
+
 
 const templateMap = {
   'uilenu-toi-classic': WeddingClassic,
   'uilenu-toi-red': WeddingRed,
-  'uzatu-toi-classic': KyzUzatuClassic,
-  'uzatu-toi-modern': KyzUzatuModern,
-  'sauilik-toi-classic': TusauKeserClassic,
-  'sauilik-toi-colorful': TusauKeserClassic,
-  'tugan-kun-classic': TusauKeserClassic,
-  'tugan-kun-minimal': TusauKeserClassic,
+  'uzatu-toi-classic': UzatuClassic,
+  'sauilik-toi-classic': SauilikClassic,
+  'sauilik-toi-colorful': SauilikClassic,
+  'tugan-kun-classic': SauilikClassic,
+  'tugan-kun-minimal': SauilikClassic,
+  'uzatu-toi-modern': UzatuModern,
+  'sauilik-toi-colorful': SauilikColorful,
+  'tugan-kun-classic': TuganKunClassic,
+
 }
 
 // Тестовые данные для демо
@@ -47,7 +54,7 @@ export default async function DemoPage({ params }) {
   }
 
   const key = `${template.category_slug}-${template.slug}`
-  const TemplateComponent = templateMap[key] || KyzUzatuClassic
+  const TemplateComponent = templateMap[key] || UzatuClassic
 
   return (
     <div className="relative">

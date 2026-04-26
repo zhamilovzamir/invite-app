@@ -65,7 +65,7 @@ export default async function Home() {
       {/* Как это работает */}
       <section className="py-20 px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl font-bold text-center mb-12">Қалай жұмыс істейді</h3>
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-900">Қалай жұмыс істейді</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { step: '1', title: 'Үлгіні таңдаңыз', desc: 'Той түріңізге сәйкес үлгіні таңдаңыз' },
@@ -76,8 +76,8 @@ export default async function Home() {
                 <div className="w-14 h-14 bg-purple-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                   {item.step}
                 </div>
-                <h4 className="text-xl font-semibold mb-2">{item.title}</h4>
-                <p className="text-gray-500">{item.desc}</p>
+                <h4 className="text-xl font-semibold mb-2 text-gray-900">{item.title}</h4>
+                <p className="text-gray-600">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -87,8 +87,8 @@ export default async function Home() {
       {/* Категории */}
       <section id="categories" className="py-20 px-8">
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-3xl font-bold text-center mb-4">Той түрін таңдаңыз</h3>
-          <p className="text-center text-gray-500 mb-12">Әр той үшін арнайы үлгілер</p>
+          <h3 className="text-3xl font-bold text-center mb-4 text-gray-900">Той түрін таңдаңыз</h3>
+          <p className="text-center text-gray-600 mb-12">Әр той үшін арнайы үлгілер</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {Object.values(categories).map((category) => (
@@ -105,9 +105,9 @@ export default async function Home() {
                   <p className="opacity-80 text-sm">
                     {category.templates.length} үлгі қол жетімді
                   </p>
-                  <div className="mt-6 inline-flex items-center gap-2 bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium group-hover:bg-opacity-30 transition">
-                    Үлгілерді қарау →
-                  </div>
+                  <div className="mt-6 inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm font-semibold transition opacity-90 group-hover:opacity-100" style={{ color: '#333' }}>
+  Үлгілерді қарау →
+</div>
                 </div>
               </Link>
             ))}
