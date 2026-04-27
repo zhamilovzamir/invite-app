@@ -1,3 +1,5 @@
+import MusicButton from '@/components/MusicButton'
+
 export default function WeddingClassic({ data }) {
   return (
     <main className="min-h-screen bg-rose-50 flex items-center justify-center p-4">
@@ -109,6 +111,10 @@ export default function WeddingClassic({ data }) {
         <div className="text-center mt-6">
           <div className="text-3xl">🌸 🌸 🌸</div>
         </div>
+        <MusicButton 
+          musicUrl={data.music_url} 
+          defaultMusicUrl="https://uuavetegsohayzhtdthh.supabase.co/storage/v1/object/public/music/Kuandyk-Rahym-Uilenem.mp3"
+        />
       </div>
     </main>
   )

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import MusicButton from '@/components/MusicButton'
 
 export default function UzatuClassic({ data }) {
   const [comment, setComment] = useState('')
@@ -217,6 +218,10 @@ export default function UzatuClassic({ data }) {
               </div>
             </div>
           )}
+          <MusicButton 
+            musicUrl={data.music_url} 
+            defaultMusicUrl="https://uuavetegsohayzhtdthh.supabase.co/storage/v1/object/public/music/minezinkorkem.mp3"
+          />
         </div>
       </section>
 

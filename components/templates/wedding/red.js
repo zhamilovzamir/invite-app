@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import MusicButton from '@/components/MusicButton'
 
 export default function WeddingRed({ data }) {
   const [days, setDays] = useState('00')
@@ -357,6 +358,10 @@ export default function WeddingRed({ data }) {
         </div>
 
       </div>
+      <MusicButton 
+        musicUrl={data.music_url} 
+        defaultMusicUrl="https://uuavetegsohayzhtdthh.supabase.co/storage/v1/object/public/music/Kuandyk-Rahym-Uilenem.mp3"
+      />
     </div>
   )
 }

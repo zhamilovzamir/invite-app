@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import MusicButton from '@/components/MusicButton'
 
 export default function SauilikClassic({ data }) {
   const [guestName, setGuestName] = useState('')
@@ -202,6 +203,10 @@ export default function SauilikClassic({ data }) {
         </div>
 
       </div>
+      <MusicButton 
+  musicUrl={data.music_url} 
+  defaultMusicUrl="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+/>
     </div>
   )
 }
