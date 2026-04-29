@@ -7,18 +7,21 @@ import { supabase } from '@/lib/supabase'
 export default function EditPage({ params: paramsPromise }) {
   const [orderId, setOrderId] = useState(null)
   const params = React.use(paramsPromise)
-  const [form, setForm] = useState({
+  const searchParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
+const prefillData = searchParams.get('prefill') ? JSON.parse(decodeURIComponent(searchParams.get('prefill'))) : {}
+
+const [form, setForm] = useState({
     customer_name: '',
     customer_phone: '',
-    guest_name: '',
-    event_date: '',
-    event_time: '',
-    venue: '',
-    map_url: '',
-    telegram_channel: '',
-    hosts: '',
-    music_url: '',
-  })
+    guest_name: prefillData.guest_name || '',
+    event_date: prefillData.event_date || '',
+    event_time: prefillData.event_time || '',
+    venue: prefillData.venue || '',
+    map_url: prefillData.map_url || '',
+    telegram_channel: prefillData.telegram_channel || '',
+    hosts: prefillData.hosts || '',
+    music_url: prefillData.music_url || '',
+})
   const [loading, setLoading] = useState(false)
   const [photoUrl, setPhotoUrl] = useState(null)
   const [uploading, setUploading] = useState(false)

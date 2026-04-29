@@ -18,9 +18,18 @@ export default function WeddingClassic({ data }) {
             <p className="text-rose-400 text-sm uppercase tracking-widest mb-2">
               Бізді қуантыңыз
             </p>
-            <h1 className="text-4xl font-serif text-rose-600 font-bold mb-1">
-              {data.guest_name || 'Есім жазылмаған'}
-            </h1>
+            // Стало:
+{data.editable ? (
+  <input
+    value={data.guest_name || ''}
+    onChange={e => data.onUpdate?.('guest_name', e.target.value)}
+    style={{ fontFamily: 'Georgia,serif', fontSize: '36px', color: '#fff', background: 'rgba(255,255,255,0.1)', border: '2px dashed rgba(255,255,255,0.5)', borderRadius: '8px', padding: '4px 12px', outline: 'none', textAlign: 'center', width: '100%' }}
+  />
+) : (
+  <h1 style={{ fontFamily: 'Georgia,serif', fontSize: '44px', fontStyle: 'italic', color: '#fff', marginBottom: '8px', lineHeight: 1 }}>
+    {data.guest_name || 'Есім'}
+  </h1>
+)}
             <div className="flex items-center justify-center gap-3 mt-4">
               <div className="h-px bg-rose-200 w-16"/>
               <div className="text-rose-300 text-xl">💍</div>
